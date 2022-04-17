@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>Play the Tetris!</title>
+  </head>
+  <body>
+    <header>
+      <span id="restart" onclick="tetris.reset()" class="btn-main">
+        <img src="img/replay.svg" alt="Replay" width="35px" height="35px" />
+      </span>
+      <div id="score">0</div>
+      <span id="play" class="btn-main">
+        <img src="img/pause.svg" alt="Replay" width="35px" height="35px" class="hidden" />
+        <img src="img/play.svg" alt="Replay" width="35px" height="35px" />
+      </span>
+    </header>
+    <canvas id="tetris" width="240" height="400"></canvas>
+    <div id="controls">
+      <div class="row">
+        <span id="rotate_ccw" onclick="player.rotate(-1)" class="btn"><small>⟲</small></span>
+        <span id="drop" onclick="player.drop()" class="btn">↓</span>
+        <span id="rotate_cw" onclick="player.rotate(1)" class="btn"><small>⟳</small></span>
+      </div>
+      <div class="row">
+        <span id="left" onclick="player.move(-1)" class="btn">←</span>
+        <span id="skip" onclick="player.skip()" class="btn">↧</span>
+        <span id="right" onclick="player.move(1)" class="btn">→</span>
+      </div>
+    </div>
+    <script src="tetris.js"></script>
+  </body>
+</html>

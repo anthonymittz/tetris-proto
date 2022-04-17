@@ -1,0 +1,124 @@
+:root {
+  --accent: #f1f1f1;
+  --lighter: #333338;
+  --page: #222222;
+  --font-size: 22pt;
+
+  --btn-min: 40px;
+  --btn-normal: 18vw;
+  --btn-max: 70px;
+
+  --bar-min: 180px;
+  --bar-normal: 80vw;
+  --bar-max: 260px;
+  --bar-height: 60px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: monospace;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--page);
+  font-size: var(--font-size);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: var(--bar-normal);
+  min-width: var(--bar-min);
+  max-width: var(--bar-max);
+  position: relative;
+  height: var(--bar-height);
+  text-align: center;
+}
+
+#score {
+  width: 100%;
+}
+
+#tetris {
+  border: 8px solid var(--lighter);
+  margin: 0.5em;
+}
+
+#controls {
+  display: none;
+}
+
+.btn {
+  cursor: pointer;
+  user-select: none;
+  height: var(--btn-normal);
+  min-height: var(--btn-min);
+  max-height: var(--btn-max);
+  width: var(--btn-normal);
+  min-width: var(--btn-min);
+  max-width: var(--btn-max);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--lighter);
+  margin: 8px;
+}
+
+.btn-main {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  opacity: 0.2;
+}
+.btn-main#restart {
+  left: 0;
+}
+.btn-main#play {
+  right: 0;
+}
+.btn-main .hidden {
+  display: none;
+}
+
+@media screen and (max-width: 720px) {
+  #controls {
+    width: var(--bar-normal);
+    min-width: var(--bar-min);
+    max-width: var(--bar-max);
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+  }
+
+  #controls .row {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+
+  #controls .row:first-of-type .btn {
+    height: calc(var(--btn-normal) - 10px);
+    min-height: calc(var(--btn-min) - 10px);
+    max-height: calc(var(--btn-max) - 10px);
+    width: calc(var(--btn-normal) - 10px);
+    min-width: calc(var(--btn-min) - 10px);
+    max-width: calc(var(--btn-max) - 10px);
+  }
+}
