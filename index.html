@@ -15,12 +15,23 @@
       </span>
       <div id="score">0</div>
       <span id="play" class="btn-main">
-        <img src="img/pause.svg" alt="Replay" width="35px" height="35px" class="hidden" />
-        <img src="img/play.svg" alt="Replay" width="35px" height="35px" />
+        <img src="img/equalizer.svg" alt="Replay" width="35px" height="35px" />
       </span>
     </header>
 
-    <canvas id="tetris" width="240" height="400" onclick="tetris.pause()"></canvas>
+    <main id="game">
+      <div id="overlay">
+        <div class="start" onclick="tetris.pause()">
+          <h2>New Game</h2>
+          <p>Click to play</p>
+        </div>
+        <div class="resume" onclick="tetris.pause()">
+          <h2>Pause</h2>
+          <p>Click to resume</p>
+        </div>
+      </div>
+      <canvas id="tetris" width="240" height="400" onclick="tetris.pause()"></canvas>
+    </main>
 
     <div id="controls">
       <div class="row">

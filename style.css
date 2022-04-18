@@ -12,6 +12,8 @@
   --bar-normal: 80vw;
   --bar-max: 260px;
   --bar-height: 60px;
+
+  --border: 8px;
 }
 
 * {
@@ -51,9 +53,54 @@ header {
   width: 100%;
 }
 
-#tetris {
-  border: 8px solid var(--lighter);
+main#game {
+  position: relative;
   margin: 0.5em;
+}
+
+#tetris {
+  border: var(--border) solid var(--lighter);
+  position: relative;
+}
+
+#overlay {
+  display: none;
+  background-color: var(--page);
+  opacity: 0.8;
+  position: absolute;
+  top: var(--border);
+  left: var(--border);
+  width: calc(100% - var(--border) * 2);
+  height: calc(100% - var(--border) * 3);
+  z-index: 10;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  font-size: calc(var(--font-size) - 8pt);
+  text-align: center;
+  user-select: none;
+}
+
+#overlay div {
+  display: none;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+}
+
+#overlay h2 {
+  margin-bottom: 0.25em;
+}
+
+#overlay.paused {
+  display: flex;
+}
+
+#overlay.start .start,
+#overlay.resume .resume {
+  display: flex;
 }
 
 #controls {
@@ -93,8 +140,8 @@ header {
 .btn-main#play {
   right: 0;
 }
-.btn-main .hidden {
-  display: none;
+.btn-main:hover {
+  opacity: 1;
 }
 
 @media screen and (max-width: 720px) {

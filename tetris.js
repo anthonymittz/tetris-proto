@@ -17,6 +17,7 @@ function Tetris() {
   this.dropCounter = 0;
   this.dropInterval = 1000; //ms
   this.paused = true;
+  this.newGame = true;
 }
 Tetris.prototype.update = function (time = 0) {
   if (!this.paused) {
@@ -30,12 +31,29 @@ Tetris.prototype.update = function (time = 0) {
   requestAnimationFrame(time => this.update(time));
 };
 Tetris.prototype.reset = function () {
+  this.toggleNewGame();
   arena.clear();
   player.resetScore();
   player.reset();
+  if (this.paused) this.pause();
 };
 Tetris.prototype.pause = function () {
+  if (this.newGame) this.newGame = false;
   this.paused = !this.paused;
+  this.updateOverlay();
+};
+Tetris.prototype.toggleNewGame = function () {
+  this.newGame = !this.newGame;
+};
+Tetris.prototype.updateOverlay = function () {
+  if (this.newGame) {
+    overlay.classList.add('start');
+    overlay.classList.remove('resume');
+  } else {
+    overlay.classList.add('resume');
+    overlay.classList.remove('start');
+  }
+  this.paused ? overlay.classList.add('paused') : overlay.classList.remove('paused');
 };
 
 /* Entities: Player */
@@ -53,6 +71,7 @@ Player.prototype.reset = function () {
   if (arena.collide(this)) tetris.reset();
 };
 Player.prototype.drop = function () {
+  if (tetris.paused) return;
   this.pos.y++;
   if (arena.collide(this)) {
     this.pos.y--;
@@ -63,6 +82,7 @@ Player.prototype.drop = function () {
   tetris.dropCounter = 0;
 };
 Player.prototype.skip = function () {
+  if (tetris.paused) return;
   while (!arena.collide(this)) this.pos.y++;
   this.pos.y--;
   arena.merge(this);
@@ -70,10 +90,12 @@ Player.prototype.skip = function () {
   this.reset();
 };
 Player.prototype.move = function (dir) {
+  if (tetris.paused) return;
   this.pos.x += dir;
   if (arena.collide(this)) this.pos.x -= dir;
 };
 Player.prototype.rotate = function (dir) {
+  if (tetris.paused) return;
   const initialX = this.pos.x;
   let offset = 1;
   const reverseOffset = () => (offset = -(offset + (offset > 0 ? 1 : -1)));
@@ -92,13 +114,13 @@ Player.prototype.rotate = function (dir) {
 };
 Player.prototype.addScore = function (amount) {
   this.score += amount * 10;
-  this.updateScore();
+  this.updateScoreView();
 };
 Player.prototype.resetScore = function () {
   this.score = 0;
-  this.updateScore();
+  this.updateScoreView();
 };
-Player.prototype.updateScore = function () {
+Player.prototype.updateScoreView = function () {
   score.innerText = this.score;
 };
 
@@ -250,29 +272,30 @@ document.addEventListener('keydown', e => {
   switch (e.code) {
     case 'ArrowLeft':
     case 'KeyA':
-      !tetris.paused && player.move(-1);
+      player.move(-1);
       break;
     case 'ArrowRight':
     case 'KeyD':
-      !tetris.paused && player.move(1);
+      player.move(1);
       break;
     case 'ArrowDown':
     case 'KeyS':
-      !tetris.paused && player.drop();
+      player.drop();
       break;
     case 'KeyQ':
-      !tetris.paused && player.rotate(-1);
+      player.rotate(-1);
       break;
     case 'ArrowUp':
     case 'KeyE':
-      !tetris.paused && player.rotate(1);
+      player.rotate(1);
       break;
     case 'Space':
-      !tetris.paused && player.skip();
+      player.skip();
       break;
     case 'Escape':
     case 'Enter':
       tetris.pause();
+      e.preventDefault();
       break;
   }
 });
@@ -283,6 +306,8 @@ const canvas = new Canvas(document.getElementById('tetris'));
 const player = new Player();
 const arena = new Matrix(12, 20);
 const score = document.getElementById('score');
+const overlay = document.getElementById('overlay');
 
 player.reset();
+tetris.updateOverlay();
 tetris.update();
