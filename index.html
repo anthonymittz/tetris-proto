@@ -19,7 +19,9 @@
         <img src="img/play.svg" alt="Replay" width="35px" height="35px" />
       </span>
     </header>
-    <canvas id="tetris" width="240" height="400"></canvas>
+
+    <canvas id="tetris" width="240" height="400" onclick="tetris.pause()"></canvas>
+
     <div id="controls">
       <div class="row">
         <span id="rotate_ccw" onclick="player.rotate(-1)" class="btn"><small>⟲</small></span>

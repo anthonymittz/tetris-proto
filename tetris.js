@@ -16,20 +16,26 @@ function Tetris() {
   this.lastTime = 0;
   this.dropCounter = 0;
   this.dropInterval = 1000; //ms
+  this.paused = true;
 }
 Tetris.prototype.update = function (time = 0) {
-  let deltaTime = time - this.lastTime;
-  this.lastTime = time;
-  this.dropCounter += deltaTime;
-  if (this.dropCounter > this.dropInterval) player.drop();
+  if (!this.paused) {
+    let deltaTime = time - this.lastTime;
+    this.lastTime = time;
+    this.dropCounter += deltaTime;
+    if (this.dropCounter > this.dropInterval) player.drop();
 
-  canvas.draw();
+    canvas.draw();
+  }
   requestAnimationFrame(time => this.update(time));
 };
 Tetris.prototype.reset = function () {
   arena.clear();
   player.resetScore();
   player.reset();
+};
+Tetris.prototype.pause = function () {
+  this.paused = !this.paused;
 };
 
 /* Entities: Player */
@@ -57,7 +63,6 @@ Player.prototype.drop = function () {
   tetris.dropCounter = 0;
 };
 Player.prototype.skip = function () {
-  console.log('skip');
   while (!arena.collide(this)) this.pos.y++;
   this.pos.y--;
   arena.merge(this);
@@ -245,25 +250,29 @@ document.addEventListener('keydown', e => {
   switch (e.code) {
     case 'ArrowLeft':
     case 'KeyA':
-      player.move(-1);
+      !tetris.paused && player.move(-1);
       break;
     case 'ArrowRight':
     case 'KeyD':
-      player.move(1);
+      !tetris.paused && player.move(1);
       break;
     case 'ArrowDown':
     case 'KeyS':
-      player.drop();
+      !tetris.paused && player.drop();
       break;
     case 'KeyQ':
-      player.rotate(-1);
+      !tetris.paused && player.rotate(-1);
       break;
     case 'ArrowUp':
     case 'KeyE':
-      player.rotate(1);
+      !tetris.paused && player.rotate(1);
       break;
     case 'Space':
-      player.skip();
+      !tetris.paused && player.skip();
+      break;
+    case 'Escape':
+    case 'Enter':
+      tetris.pause();
       break;
   }
 });
