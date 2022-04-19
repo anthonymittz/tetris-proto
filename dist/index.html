@@ -4,23 +4,37 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/dist/public/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="180x180" href="/dist/public/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/dist/public/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/dist/public/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/dist/public/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/dist/public/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/dist/public/favicons/favicon.ico">
     <link rel="stylesheet" href="styles/main.css" />
     <title>Play the Tetris!</title>
   </head>
   <body>
     <header>
-      <span id="restart" onclick="" class="btn-main">
-        <img src="public/icons/replay.svg" alt="Replay" width="35px" height="35px" />
+      <span id="restart" onclick="">
+        <img src="public/icons/replay.svg" alt="restart" width="35px" height="35px" />
       </span>
       <div id="score">0</div>
-      <span id="play" class="btn-main">
-        <img src="public/icons/equalizer.svg" alt="Replay" width="35px" height="35px" />
+      <span id="settings">
+        <img src="public/icons/equalizer.svg" alt="settings" width="35px" height="35px" />
       </span>
     </header>
 
     <main id="game">
       <div id="overlay">
-        <div class="start" onclick="">
+        <div class="control">
+          <button>Options</button>
+          <button>Controls</button>
+          <button class="stats">Stats</button>
+        </div>
+        <div class="new" onclick="">
           <h2>New Game</h2>
           <p>Click to play</p>
         </div>
@@ -28,13 +42,46 @@
           <h2>Pause</h2>
           <p>Click to resume</p>
         </div>
+        <div class="options" onclick="">
+          <h2>Options</h2>
+          <input type="checkbox">Sound</input>
+          <button>Clear storage...</button>
+        </div>
+        <div class="controls" onclick="">
+          <h2>Controls</h2>
+          <ul>
+            <p>Game</p>
+            <li><pre>Esc</pre> - pause</li>
+            <li><pre>Enter</pre> - restart</li>
+            <p>Move</p>
+            <li><pre>A</pre>,<pre>Left</pre> - left</li>
+            <li><pre>D</pre>,<pre>Right</pre> - right</li>
+            <li><pre>S</pre>,<pre>Down</pre> - drop</li>
+            <li><pre>Space</pre> - skip</li>
+            <p>Rotate</p>
+            <li><pre>Q</pre> - counter-clockwise</li>
+            <li><pre>E</pre><pre>Right</pre> - clockwise</li>
+          </ul>
+        </div>
+        <div class="stats" onclick="">
+          <h2>Statistics</h2>
+          <ol>
+            <li>
+              <h3>1250</h3>
+              <p>12 april</p>
+            </li>
+          </ol>
+        </div>
       </div>
-      <canvas id="tetris" width="240" height="400" onclick=""></canvas>
+      <canvas id="canvas" width="240" height="400" onclick=""></canvas>
     </main>
 
     <aside id="records">
       <ol>
-        <li></li>
+        <li>
+          <h3>1250</h3>
+          <p>12 april</p>
+        </li>
       </ol>
     </aside>
 
@@ -50,6 +97,7 @@
         <span id="right" onclick="" class="btn">→</span>
       </div>
     </div>
+
     <script src="tetris.js"></script>
   </body>
 </html>

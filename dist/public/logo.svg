@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="760px" height="760px" viewBox="0 0 760 760" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Android Logo</title>
+    <g id="Android-Logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2" transform="translate(168.000000, 168.000000)">
+            <path d="M170,425 L170,340 L255,340 L255,255 L340,255 L340,340 L425,340 L425,425 L170,425 Z" id="Combined-Shape" fill="#55C2AF"></path>
+            <path d="M0,170 L85,170 L85,340 L170,340 L170,425 L0,425 L0,170 Z" id="Combined-Shape" fill="#EE5453"></path>
+            <path d="M255,0 L340,0 L340,85 L425,85 L425,255 L340,255 L340,170 L255,170 L255,0 Z" id="Combined-Shape" fill="#F3913D"></path>
+            <path d="M255,340 L85,340 L85,170 L255,170 L255,340 Z" id="Combined-Shape" fill="#FBE158"></path>
+        </g>
+    </g>
+</svg>
