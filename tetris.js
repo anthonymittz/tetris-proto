@@ -35,6 +35,7 @@ Tetris.prototype.reset = function () {
   arena.clear();
   player.resetScore();
   player.reset();
+  state.save(arena);
   if (this.paused) this.pause();
 };
 Tetris.prototype.pause = function () {
@@ -54,6 +55,37 @@ Tetris.prototype.updateOverlay = function () {
     overlay.classList.remove('start');
   }
   this.paused ? overlay.classList.add('paused') : overlay.classList.remove('paused');
+};
+
+function State() {
+  this.unfinished = this.checkUnfinished();
+  this.arena = new Matrix(12, 20, this.unfinished);
+  this.initialize('game', this.arena);
+  this.record = this.initialize('record', []);
+  if (this.unfinished) {
+    tetris.newGame = false;
+    player.setScore(this.initialize('score', 0));
+  }
+}
+State.prototype.initialize = function (key, data) {
+  const item = localStorage.getItem(key);
+  if (!item) localStorage.setItem(key, JSON.stringify(data));
+  return JSON.parse(item);
+};
+State.prototype.save = function (arena) {
+  localStorage.setItem('scoretable', JSON.stringify(this.scoretable));
+  localStorage.setItem('game', JSON.stringify(arena));
+  localStorage.setItem('score', JSON.stringify(player.score));
+};
+State.prototype.clear = function () {
+  localStorage.removeItem('scoretable');
+  localStorage.removeItem('prevGame');
+  this.scoretable = [];
+  this.prevGame = [];
+};
+State.prototype.checkUnfinished = function () {
+  let game = JSON.parse(localStorage.getItem('game'));
+  return game && game.length > 0 ? game : null;
 };
 
 /* Entities: Player */
@@ -116,6 +148,10 @@ Player.prototype.addScore = function (amount) {
   this.score += amount * 10;
   this.updateScoreView();
 };
+Player.prototype.setScore = function (score) {
+  this.score = score;
+  this.updateScoreView();
+};
 Player.prototype.resetScore = function () {
   this.score = 0;
   this.updateScoreView();
@@ -125,9 +161,11 @@ Player.prototype.updateScoreView = function () {
 };
 
 /* Entities: Matrix */
-function Matrix(w, h) {
-  const matrix = [];
-  while (h--) matrix.push(new Array(w).fill(0));
+function Matrix(w, h, matrix) {
+  if (!matrix || matrix.length === 0) {
+    matrix = [];
+    while (h--) matrix.push(new Array(w).fill(0));
+  }
   Array.prototype.push.apply(this, matrix);
 }
 Matrix.prototype = Object.create(Array.prototype);
@@ -267,6 +305,19 @@ Canvas.prototype.draw = function () {
   player.shape.draw(player.pos);
 };
 
+/* Instantiation & Execution */
+const canvas = new Canvas(document.getElementById('tetris'));
+const score = document.getElementById('score');
+const overlay = document.getElementById('overlay');
+const tetris = new Tetris();
+const player = new Player();
+const state = new State();
+const arena = state.arena;
+
+player.reset();
+tetris.updateOverlay();
+tetris.update();
+
 /* Event Handlers */
 document.addEventListener('keydown', e => {
   switch (e.code) {
@@ -299,15 +350,6 @@ document.addEventListener('keydown', e => {
       break;
   }
 });
-
-/* Instantiation & Execution */
-const tetris = new Tetris();
-const canvas = new Canvas(document.getElementById('tetris'));
-const player = new Player();
-const arena = new Matrix(12, 20);
-const score = document.getElementById('score');
-const overlay = document.getElementById('overlay');
-
-player.reset();
-tetris.updateOverlay();
-tetris.update();
+window.addEventListener('beforeunload', e => {
+  state.save(arena);
+});
