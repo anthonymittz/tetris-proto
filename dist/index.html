@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <title>Play the Tetris!</title>
+  </head>
+  <body>
+    <header>
+      <span id="restart" onclick="" class="btn-main">
+        <img src="public/icons/replay.svg" alt="Replay" width="35px" height="35px" />
+      </span>
+      <div id="score">0</div>
+      <span id="play" class="btn-main">
+        <img src="public/icons/equalizer.svg" alt="Replay" width="35px" height="35px" />
+      </span>
+    </header>
+
+    <main id="game">
+      <div id="overlay">
+        <div class="start" onclick="">
+          <h2>New Game</h2>
+          <p>Click to play</p>
+        </div>
+        <div class="resume" onclick="">
+          <h2>Pause</h2>
+          <p>Click to resume</p>
+        </div>
+      </div>
+      <canvas id="tetris" width="240" height="400" onclick=""></canvas>
+    </main>
+
+    <aside id="records">
+      <ol>
+        <li></li>
+      </ol>
+    </aside>
+
+    <div id="controls">
+      <div class="row">
+        <span id="rotate_ccw" onclick="" class="btn"><small>⟲</small></span>
+        <span id="drop" onclick="" class="btn">↓</span>
+        <span id="rotate_cw" onclick="" class="btn"><small>⟳</small></span>
+      </div>
+      <div class="row">
+        <span id="left" onclick="" class="btn">←</span>
+        <span id="skip" onclick="" class="btn">↧</span>
+        <span id="right" onclick="" class="btn">→</span>
+      </div>
+    </div>
+    <script src="tetris.js"></script>
+  </body>
+</html>
