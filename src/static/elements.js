@@ -4,3 +4,5 @@ const elements = {
   overlay: document.getElementById('overlay'),
   records: document.getElementById('records'),
 };
+
+export default elements;

@@ -1,9 +1,17 @@
-function Arena(width = 12, height = 20) {
-  const arena = new Matrix(width, height);
-  Array.prototype.push.apply(this, arena);
-}
+import Matrix from './Matrix';
 
-Arena.prototype = Object.create(Matrix.prototype);
-Arena.prototype.constructor = Matrix;
+class Arena extends Matrix {
+  constructor(width = 12, height = 20) {
+    super(width, height);
+  }
+
+  sweep() {
+    console.log('[arena] sweep');
+  }
+
+  reset() {
+    console.log('[arena] reset');
+  }
+}
 
 export default Arena;

@@ -1,3 +1,5 @@
-function Storage() {}
+class Storage {
+  constructor() {}
+}
 
 export default Storage;

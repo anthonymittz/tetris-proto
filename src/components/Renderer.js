@@ -1,3 +1,5 @@
-function Renderer() {}
+class Renderer {
+  constructor() {}
+}
 
 export default Renderer;

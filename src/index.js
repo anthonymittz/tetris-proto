@@ -1,5 +1,5 @@
-import colors from './data/colors.json';
-import './data/elements';
+import colors from './static/colors.json';
+import elements from './static/elements';
 
 // window.addEventListener('keydown', e => {
 //   for (var type in controls) {

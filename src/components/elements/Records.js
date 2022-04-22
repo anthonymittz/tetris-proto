@@ -1,3 +1,5 @@
-function Records() {}
+class Records {
+  constructor() {}
+}
 
 export default Records;

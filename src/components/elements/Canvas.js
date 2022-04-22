@@ -1,3 +1,5 @@
-function Canvas() {}
+class Canvas {
+  constructor() {}
+}
 
 export default Canvas;
