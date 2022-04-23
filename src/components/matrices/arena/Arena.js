@@ -1,4 +1,4 @@
-import Matrix from './Matrix';
+const Matrix = require('../matrix/Matrix');
 
 class Arena extends Matrix {
   constructor(width = 12, height = 20) {
@@ -14,4 +14,4 @@ class Arena extends Matrix {
   }
 }
 
-export default Arena;
+module.exports = Arena;

@@ -1,8 +1,14 @@
 class Matrix extends Array {
-  constructor(width = 2, height = 2) {
+  constructor(width = 2, height = 2, array) {
     super();
-    Matrix.#checkWidthAndHeight(width, height);
-    while (height--) this.push(new Array(width).fill(0));
+    if (!array) {
+      Matrix.#checkWidthAndHeight(width, height);
+      while (height--) this.push(new Array(width).fill(0));
+    } else {
+      height = array.length;
+      let matrix = Matrix.fromArray(array);
+      matrix.forEach(row => this.push(row));
+    }
   }
 
   equals(matrix) {

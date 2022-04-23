@@ -78,6 +78,10 @@ describe('can create the instance from an array', () => {
     [0, 0, 0],
     [0, 0, 0],
   ];
+  test('can accept an array as the third optional parameter while ignoring width and height', () => {
+    expect(new Matrix(1, 1, array)).toEqual(Matrix.fromArray(array));
+  });
+
   test('throws an error if the argument is not an Array instance', () => {
     expect(() => Matrix.fromArray('string')).toThrow(
       'You must provide an array.'
