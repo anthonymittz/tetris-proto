@@ -8,6 +8,7 @@ describe('returns a collection of Tetrominoes', () => {
   test('returns an array', () => {
     expect(Array.isArray(bag)).toBe(true);
   });
+
   test('returns an array of 7 letters that symbolize the tetrominoes', () => {
     expect(bag.length).toBe(7);
     bag.forEach(tetromino => {

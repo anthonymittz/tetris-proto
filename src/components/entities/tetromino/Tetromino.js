@@ -1,9 +1,11 @@
 const Matrix = require('../matrix/Matrix');
+const colors = require('../../../static/colors.json');
 
 class Tetromino extends Matrix {
-  constructor(type = 'T') {
-    Tetromino.#checkType(type);
-    super(3, 3, Tetromino.shapes[type]);
+  constructor(shape = 'T', color = Tetromino.#randomColor()) {
+    Tetromino.#checkType(shape);
+    let blank = Tetromino.#color(Tetromino.shapes[shape], color);
+    super(3, 3, blank);
   }
 
   static shapes = {
@@ -43,13 +45,22 @@ class Tetromino extends Matrix {
       [0, 1, 1],
     ],
   };
-  static #checkType(type) {
+
+  static #checkType(shape) {
     const shapes = Object.keys(Tetromino.shapes);
-    if (typeof type !== 'string' || type.length === 0) {
+    if (typeof shape !== 'string' || shape.length === 0) {
       throw new Error('You must provide the known type of Tetromino.');
     }
-    if (!shapes.includes(type))
-      throw new Error(`Tetromino of type "${type}" does not exist.`);
+    if (!shapes.includes(shape))
+      throw new Error(`Tetromino of the shape "${shape}" does not exist.`);
+  }
+
+  static #color(blank, color) {
+    return blank.map(row => row.map(value => (value === 0 ? 0 : color)));
+  }
+
+  static #randomColor() {
+    return Math.floor(Math.random() * colors.length);
   }
 }
 
