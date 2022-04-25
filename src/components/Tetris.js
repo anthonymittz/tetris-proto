@@ -8,7 +8,7 @@ class Tetris {
     this.game = new Game();
     this.lastRendered = 0;
     this.stepCounter = 0;
-    this.stepInterval = 1000; //ms
+    this.interval = 1000; //ms
   }
 
   run() {
@@ -16,19 +16,19 @@ class Tetris {
   }
 
   update(time = 0) {
-    if (!this.isPaused) this.tryToStep(time);
+    this.isPaused || this.tryToStep(time);
     requestAnimationFrame(time => this.update(time));
   }
 
   tryToStep(time) {
-    const deltaTime = time - this.lastRendered;
+    this.stepCounter += time - this.lastRendered;
     this.lastRendered = time;
-    this.stepCounter += deltaTime;
-    if (this.stepCounter > this.stepInterval) this.step();
+    if (this.stepCounter > this.interval) this.step();
   }
 
   step() {
-    console.log('[Tetris] step');
+    // this.game.player.down();
+    console.log('[Tetris] stop');
     this.stepCounter = 0;
   }
 
