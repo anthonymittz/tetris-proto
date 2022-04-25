@@ -6,6 +6,7 @@ module.exports = {
   devServer: {
     static: 'dist',
   },
+  devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'tetris.js',
