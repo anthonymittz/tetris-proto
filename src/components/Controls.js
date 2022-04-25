@@ -33,4 +33,4 @@ class Controls {
   }
 }
 
-export default Controls;
+module.exports = Controls;

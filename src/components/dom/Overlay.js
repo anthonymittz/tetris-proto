@@ -5,4 +5,4 @@ class Overlay {
   }
 }
 
-export default Overlay;
+module.exports = Overlay;

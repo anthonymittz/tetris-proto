@@ -5,9 +5,10 @@ class Elements {
     this.overlay = document.getElementById('overlay');
     this.pause = document.getElementById('pause');
     this.controls = document.getElementById('controls');
+
     this.game = document.getElementById('game');
     this.preview = document.getElementById('preview');
   }
 }
 
-export default Elements;
+module.exports = Elements;

@@ -14,3 +14,5 @@ class Canvas {
     this.context.fillRect(0, 0, this.width, this.height);
   }
 }
+
+module.exports = Canvas;

@@ -2,4 +2,4 @@ class Storage {
   constructor() {}
 }
 
-export default Storage;
+module.exports = Storage;
