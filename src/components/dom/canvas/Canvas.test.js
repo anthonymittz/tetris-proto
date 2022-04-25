@@ -5,7 +5,6 @@ canvasElement.width = 10;
 canvasElement.height = 10;
 
 let canvas = new Canvas(canvasElement);
-
 beforeEach(() => (canvas = new Canvas(canvasElement)));
 
 describe('A Canvas class', () => {

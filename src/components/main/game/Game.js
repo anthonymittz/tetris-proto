@@ -1,10 +1,9 @@
-const Player = require('./player/Player');
+const Player = require('../../entities/player/Player');
 
 class Game {
-  constructor(player) {
+  constructor() {
     this.score = 0;
     this.player = new Player();
-    this.isPaused = true;
   }
 }
 
