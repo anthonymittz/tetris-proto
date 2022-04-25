@@ -16,6 +16,11 @@ test('has `Array` as a parent class in the prototype chain', () => {
   expect(Array.prototype.isPrototypeOf(matrix)).toBeTruthy();
 });
 
+test('can fill all elements', () => {
+  matrix.fill(5);
+  matrix.forEach(row => row.forEach(value => expect(value).toBe(5)));
+});
+
 describe('2D matrix class', () => {
   const errorMessage = 'Cannot be smaller than 2x2.';
 
