@@ -35,6 +35,26 @@ class Matrix extends Array {
     return this.length;
   }
 
+  fill(number = 0) {
+    this.forEach((row, h) => row.forEach((_, w) => (this[h][w] = number)));
+  }
+
+  collide(matrix, offset = { x: 0, y: 0 }) {
+    Matrix.#checkIfMatrix(matrix);
+    Matrix.#checkOffset(offset);
+    return this.#checkCollision(matrix, offset);
+  }
+
+  #checkCollision(m, o) {
+    for (let y = 0; y < m.length; y++) {
+      for (let x = 0; x < m[y].length; x++) {
+        if (m[y][x] !== 0 && (this[y + o.y] && this[y + o.y][x + o.x]) !== 0)
+          return true;
+      }
+    }
+    return false;
+  }
+
   #rotateCW() {
     const transposed = this.#transpose();
     transposed.forEach((_, h) => (this[h] = transposed[h].reverse()));
@@ -99,6 +119,13 @@ class Matrix extends Array {
       throw new Error(
         'You must provide any positive or negative number except 0.'
       );
+  }
+  static #checkOffset(offset) {
+    if (typeof offset.x !== 'number' || typeof offset.y !== 'number') {
+      throw new Error(
+        'You must provide an offset in format: {x: number, y: number}.'
+      );
+    }
   }
 }
 

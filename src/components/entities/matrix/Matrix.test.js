@@ -16,7 +16,7 @@ test('has `Array` as a parent class in the prototype chain', () => {
   expect(Array.prototype.isPrototypeOf(matrix)).toBeTruthy();
 });
 
-describe('has a structure of a 2D matrix', () => {
+describe('2D matrix class', () => {
   const errorMessage = 'Cannot be smaller than 2x2.';
 
   test('has the specified width', () => {
@@ -48,7 +48,7 @@ describe('has a structure of a 2D matrix', () => {
   });
 });
 
-describe('can compare the instance with another matrix', () => {
+describe('can compare itself with another instance', () => {
   test('throws an error if the argument not a Matrix instance', () => {
     expect(() => matrix.equals('string')).toThrow(
       'You must provide an instance of Matrix.'
@@ -63,6 +63,9 @@ describe('can compare the instance with another matrix', () => {
 
   test('returns true if they are equal', () => {
     const anotherMatrix = new Matrix(3, 5);
+    expect(matrix.equals(anotherMatrix)).toBe(true);
+    matrix[height - 1][width - 1] = 5;
+    anotherMatrix[height - 1][width - 1] = 5;
     expect(matrix.equals(anotherMatrix)).toBe(true);
   });
 
@@ -247,5 +250,39 @@ describe('can rotate the matrix CW and CCW', () => {
     matrix.rotate(-1);
 
     expect(matrix.equals(result)).toBe(true);
+  });
+});
+
+describe('can collide with another instance', () => {
+  const anotherMatrix = new Matrix(2, 2);
+  anotherMatrix.fill(5);
+
+  test('accepts an offset object', () => {
+    expect(() =>
+      matrix.collide(anotherMatrix, { x: 'foo', y: 'bar' })
+    ).toThrow();
+    expect(() =>
+      matrix.collide(anotherMatrix, { w: 'foo', h: 'bar' })
+    ).toThrow();
+    expect(() => matrix.collide(anotherMatrix, { x: 2, y: -4 })).not.toThrow();
+    expect(() => matrix.collide(anotherMatrix)).not.toThrow();
+  });
+  test('throws an error if not provided with a Matrix instance', () => {
+    expect(() => matrix.collide('foo')).toThrow();
+    expect(() => matrix.collide([0])).toThrow();
+    expect(() => matrix.collide([[0], [0]])).toThrow();
+    expect(() =>
+      matrix.collide([
+        [0, 0],
+        [0, 0],
+      ])
+    ).toThrow();
+  });
+  test('detects a collision', () => {
+    expect(matrix.collide(anotherMatrix, { x: 10, y: 20 })).toBe(true);
+    expect(matrix.collide(anotherMatrix, { x: -1, y: 0 })).toBe(true);
+    expect(matrix.collide(anotherMatrix, { x: 0, y: 0 })).toBe(false);
+    matrix[0][0] = 2;
+    expect(matrix.collide(anotherMatrix, { x: 0, y: 0 })).toBe(true);
   });
 });

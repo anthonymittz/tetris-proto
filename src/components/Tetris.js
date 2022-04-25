@@ -6,8 +6,8 @@ class Tetris {
     this.canvas = props.canvas;
     this.overlay = props.overlay;
     this.game = new Game();
-    this.lastRendered = 0;
-    this.stepCounter = 0;
+    this.lastRendered = 0; //ms
+    this.stepCounter = 0; //ms
     this.interval = 1000; //ms
   }
 
@@ -28,7 +28,7 @@ class Tetris {
 
   step() {
     // this.game.player.down();
-    console.log('[Tetris] stop');
+    console.log('[Tetris] step');
     this.stepCounter = 0;
   }
 
