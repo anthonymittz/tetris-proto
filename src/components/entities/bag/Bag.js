@@ -3,16 +3,12 @@ const Tetromino = require('../tetromino/Tetromino');
 class Bag extends Array {
   constructor(template) {
     super();
-    if (template) {
-      this.#generateFromTemplate(template);
-    } else {
-      this.#generate();
-    }
+    template ? this.#fromTemplate(template) : this.#generate();
   }
 
   shake() {
-    this.splice(0, this.length);
-    this.#generate();
+    this.#empty();
+    this.#refill();
   }
 
   equals(bag) {
@@ -20,16 +16,14 @@ class Bag extends Array {
     return bag.every((element, i) => element === this[i]);
   }
 
-  #generate() {
-    const sequence = this.#random(Bag.availableShapes.length);
-    sequence.forEach(index => {
-      this.push(Bag.availableShapes[index]);
-    });
+  pull() {
+    this.shift();
+    if (this.length < 3) this.#refill();
   }
 
-  #generateFromTemplate(template) {
-    this.#checkTemplate(template);
-    template.split('').forEach(letter => this.push(letter));
+  #refill() {
+    const set = new Bag();
+    set.forEach(item => this.push(item));
   }
 
   #random(length) {
@@ -41,6 +35,16 @@ class Bag extends Array {
     return result;
   }
 
+  #generate() {
+    const sequence = this.#random(Bag.availableShapes.length);
+    sequence.forEach(index => this.push(Bag.availableShapes[index]));
+  }
+
+  #fromTemplate(template) {
+    this.#checkTemplate(template);
+    template.split('').forEach(letter => this.push(letter));
+  }
+
   #checkTemplate(template) {
     template.split('').forEach(letter => {
       if (!Bag.availableShapes.includes(letter))
@@ -48,6 +52,10 @@ class Bag extends Array {
           'You must provide a template that contains only the known types of Tetrominoes.'
         );
     });
+  }
+
+  #empty() {
+    this.length = 0;
   }
 
   static availableShapes = Object.keys(Tetromino.shapes);
