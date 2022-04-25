@@ -2,23 +2,37 @@ const Game = require('./main/game/Game');
 
 class Tetris {
   constructor(props = Tetris.#defaultProps) {
-    this.isPaused = true;
+    this.isPaused = false;
     this.canvas = props.canvas;
     this.overlay = props.overlay;
     this.game = new Game();
+    this.lastRendered = 0;
+    this.stepCounter = 0;
+    this.stepInterval = 1000; //ms
   }
 
   run() {
-    console.log('[Tetris] start');
+    this.update();
   }
 
-  #update() {
-    console.log('[Tetris] update');
+  update(time = 0) {
+    if (!this.isPaused) this.tryToStep(time);
+    requestAnimationFrame(time => this.update(time));
   }
 
-  pause() {
-    console.log('[Tetris] pause');
+  tryToStep(time) {
+    const deltaTime = time - this.lastRendered;
+    this.lastRendered = time;
+    this.stepCounter += deltaTime;
+    if (this.stepCounter > this.stepInterval) this.step();
   }
+
+  step() {
+    console.log('[Tetris] step');
+    this.stepCounter = 0;
+  }
+
+  pause() {}
 
   static #defaultProps = {
     canvas: { game: null, preview: null },
