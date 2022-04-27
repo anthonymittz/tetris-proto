@@ -59,10 +59,6 @@ class Bag extends Array {
   }
 
   static availableShapes = Object.keys(Tetromino.shapes);
-
-  static generate(template) {
-    return new Bag(template);
-  }
 }
 
 module.exports = Bag;

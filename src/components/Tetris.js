@@ -28,11 +28,12 @@ class Tetris {
 
   step() {
     // this.game.player.down();
-    console.log('[Tetris] step');
     this.stepCounter = 0;
   }
 
-  pause() {}
+  pause() {
+    console.log('[Tetris] pause');
+  }
 
   static #defaultProps = {
     canvas: { game: null, preview: null },
