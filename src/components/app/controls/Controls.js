@@ -28,11 +28,11 @@ class Controls {
     },
     rotateCW: {
       keys: ['KeyE', 'ArrowUp'],
-      action: () => this.tetris.isPaused || this.actions.rotate(-1),
+      action: () => this.tetris.isPaused || this.actions.rotate(1),
     },
     rotateCCW: {
       keys: ['KeyQ'],
-      action: () => this.tetris.isPaused || this.actions.rotate(1),
+      action: () => this.tetris.isPaused || this.actions.rotate(-1),
     },
     skip: {
       keys: ['Space'],

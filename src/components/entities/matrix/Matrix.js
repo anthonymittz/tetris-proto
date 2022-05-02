@@ -23,8 +23,6 @@ class Matrix extends Array {
   }
 
   rotate(direction = 1) {
-    debugger;
-    console.log('[matrix] rotate!');
     Matrix.#checkDirection(direction);
     direction > 0 ? this.#rotateCW() : this.#rotateCCW();
   }
@@ -73,7 +71,14 @@ class Matrix extends Array {
   }
 
   #transpose() {
-    return this[0].map((_, index) => this.map(row => row[index]));
+    const rotated = [];
+    this[0].forEach((_, x) => {
+      rotated.push([]);
+      this.forEach((_, y) => {
+        rotated[x].push(this[y][x]);
+      });
+    });
+    return rotated;
   }
 
   #truncate(length) {

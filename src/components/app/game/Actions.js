@@ -15,7 +15,6 @@ class Actions {
 
   rotate(direction) {
     direction > 0 ? this.player.rotateCW() : this.player.rotateCCW();
-    console.log('[Actions] rotate', direction > 0 ? 'cw' : 'ccw');
   }
 
   move(direction) {
@@ -26,7 +25,10 @@ class Actions {
   }
 
   skip() {
-    console.log('[Actions] skip');
+    while (!this.arena.collide(this.player.tetromino, this.player.pos))
+      this.player.down();
+    this.player.up();
+    this.progress();
   }
 }
 

@@ -11,9 +11,6 @@ class Game {
     this.bag = new Bag();
     const currentTetromino = this.bag.pull();
     this.nextTetromino = this.bag.next();
-
-    console.log(this.nextTetromino);
-
     this.player = new Player(currentTetromino);
 
     this.actions = new Actions(this.arena, this.player, () => this.progress());
