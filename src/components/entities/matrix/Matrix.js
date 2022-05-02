@@ -23,6 +23,8 @@ class Matrix extends Array {
   }
 
   rotate(direction = 1) {
+    debugger;
+    console.log('[matrix] rotate!');
     Matrix.#checkDirection(direction);
     direction > 0 ? this.#rotateCW() : this.#rotateCCW();
   }

@@ -1,7 +1,8 @@
 const Matrix = require('../matrix/Matrix');
+const { arena } = require('../../../static/config.json');
 
 class Arena extends Matrix {
-  constructor(width = 12, height = 20) {
+  constructor(width = arena.width, height = arena.height) {
     super(width, height);
   }
 

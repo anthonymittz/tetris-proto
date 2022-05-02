@@ -8,7 +8,7 @@ test('will generate a new set of tetrominoes if the existing set runs out', () =
   let length = 7;
   while (length > 2) {
     expect(game.bag.length).toBe(length);
-    game.step();
+    game.stepPlayer();
     length--;
   }
   expect(game.bag.length).toBe(9);

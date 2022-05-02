@@ -4,17 +4,17 @@ class Events {
   }
 
   register() {
-    window.addEventListener('keydown', e => this.keyDown(e.code));
+    window.addEventListener('keydown', e => this.keyDown(e));
     window.addEventListener('beforeunload', () => this.beforeUnload());
   }
 
   unregister() {
-    window.removeEventListener('keydown', e => this.keyDown(e.code));
+    window.removeEventListener('keydown', e => this.keyDown(e));
     window.addEventListener('beforeunload', () => this.beforeUnload());
   }
 
-  keyDown(code) {
-    this.controls.press(code);
+  keyDown(event) {
+    this.controls.press(event);
   }
 
   beforeUnload() {}

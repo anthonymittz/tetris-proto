@@ -1,3 +1,6 @@
+const colors = require('../../static/colors.json');
+const Canvas = require('./Canvas');
+
 class Elements {
   constructor() {
     this.score = document.getElementById('score');
@@ -6,9 +9,18 @@ class Elements {
     this.pause = document.getElementById('pause');
     this.controls = document.getElementById('controls');
 
-    this.game = document.getElementById('game');
-    this.preview = document.getElementById('preview');
+    this.gameCanvas = new Canvas(document.getElementById('game'), {
+      colors,
+      scale: 20,
+    });
+
+    this.previewCanvas = new Canvas(document.getElementById('preview'), {
+      colors,
+      scale: 5,
+    });
   }
 }
 
-module.exports = Elements;
+const elements = new Elements();
+
+module.exports = elements;

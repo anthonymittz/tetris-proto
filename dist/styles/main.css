@@ -79,7 +79,7 @@ body {
   justify-self: end;
   background-color: lightgray;
   width: 28px;
-  height: 32px;
+  height: 30px;
 }
 
 #view {
@@ -92,10 +92,12 @@ body {
   position: relative;
   box-sizing: border-box;
   background-color: white;
+  z-index: 0;
 }
 
 #overlay {
-  background-color: rgba(200, 200, 200, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
   position: absolute;
   left: 0;
   top: 0;

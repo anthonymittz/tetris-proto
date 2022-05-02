@@ -17,8 +17,13 @@ class Bag extends Array {
   }
 
   pull() {
-    this.shift();
+    let tetromino = this.shift();
     if (this.length < 3) this.#refill();
+    return new Tetromino(tetromino);
+  }
+
+  next() {
+    return new Tetromino(this[0]);
   }
 
   #refill() {

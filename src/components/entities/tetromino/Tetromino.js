@@ -5,7 +5,7 @@ class Tetromino extends Matrix {
   constructor(shape = 'T', color = Tetromino.#randomColor()) {
     Tetromino.#checkType(shape);
     let blank = Tetromino.#color(Tetromino.shapes[shape], color);
-    super(3, 3, blank);
+    super(blank[0].length, blank.length, blank);
   }
 
   static shapes = {
@@ -49,7 +49,7 @@ class Tetromino extends Matrix {
   static #checkType(shape) {
     const shapes = Object.keys(Tetromino.shapes);
     if (typeof shape !== 'string' || shape.length === 0) {
-      throw new Error('You must provide the known type of Tetromino.');
+      throw new Error(`Unknown type of tetromino: ${shape}`);
     }
     if (!shapes.includes(shape))
       throw new Error(`Tetromino of the shape "${shape}" does not exist.`);
@@ -60,7 +60,8 @@ class Tetromino extends Matrix {
   }
 
   static #randomColor() {
-    return Math.floor(Math.random() * colors.length);
+    let color = (Math.random() * (colors.length - 1) + 1) | 0;
+    return color;
   }
 }
 
