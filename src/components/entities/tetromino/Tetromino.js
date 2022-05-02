@@ -4,46 +4,96 @@ const colors = require('../../../static/colors.json');
 class Tetromino extends Matrix {
   constructor(shape = 'T', color = Tetromino.#randomColor()) {
     Tetromino.#checkType(shape);
-    let blank = Tetromino.#color(Tetromino.shapes[shape], color);
+    let blank = Tetromino.#color(Tetromino.shapes[shape].scheme, color);
     super(blank[0].length, blank.length, blank);
+
+    Object.defineProperty(this, 'shape', { enumerable: false, writable: true });
+    Object.defineProperty(this, 'center', {
+      enumerable: false,
+      writable: true,
+    });
+    this.shape = shape;
+    this.center = { ...Tetromino.shapes[shape].center };
   }
 
   static shapes = {
-    I: [
-      [0, 1, 0, 0],
-      [0, 1, 0, 0],
-      [0, 1, 0, 0],
-      [0, 1, 0, 0],
-    ],
-    J: [
-      [0, 1, 0],
-      [0, 1, 0],
-      [1, 1, 0],
-    ],
-    L: [
-      [0, 1, 0],
-      [0, 1, 0],
-      [0, 1, 1],
-    ],
-    O: [
-      [1, 1],
-      [1, 1],
-    ],
-    S: [
-      [0, 0, 0],
-      [0, 1, 1],
-      [1, 1, 0],
-    ],
-    T: [
-      [0, 0, 0],
-      [1, 1, 1],
-      [0, 1, 0],
-    ],
-    Z: [
-      [0, 0, 0],
-      [1, 1, 0],
-      [0, 1, 1],
-    ],
+    I: {
+      scheme: [
+        [0, 1, 0, 0],
+        [0, 1, 0, 0],
+        [0, 1, 0, 0],
+        [0, 1, 0, 0],
+      ],
+      center: {
+        x: 0.7,
+        y: 2,
+      },
+    },
+    J: {
+      scheme: [
+        [0, 1, 0],
+        [0, 1, 0],
+        [1, 1, 0],
+      ],
+      center: {
+        x: 0.2,
+        y: 1.5,
+      },
+    },
+    L: {
+      scheme: [
+        [0, 1, 0],
+        [0, 1, 0],
+        [0, 1, 1],
+      ],
+      center: {
+        x: 1,
+        y: 1.5,
+      },
+    },
+    O: {
+      scheme: [
+        [1, 1],
+        [1, 1],
+      ],
+      center: {
+        x: 0.2,
+        y: 1,
+      },
+    },
+    S: {
+      scheme: [
+        [0, 0, 0],
+        [0, 1, 1],
+        [1, 1, 0],
+      ],
+      center: {
+        x: 0.7,
+        y: 2,
+      },
+    },
+    T: {
+      scheme: [
+        [0, 0, 0],
+        [1, 1, 1],
+        [0, 1, 0],
+      ],
+      center: {
+        x: 0.7,
+        y: 2,
+      },
+    },
+    Z: {
+      scheme: [
+        [0, 0, 0],
+        [1, 1, 0],
+        [0, 1, 1],
+      ],
+      center: {
+        x: 0.7,
+        y: 2,
+      },
+    },
   };
 
   static #checkType(shape) {

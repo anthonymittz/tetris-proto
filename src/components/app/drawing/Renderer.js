@@ -18,7 +18,7 @@ class Renderer {
       colors
     );
     this.previewDrawer = new PreviewView(
-      game.nextTetromino,
+      game,
       elements.previewCanvas.context,
       elements.previewCanvas.scale,
       colors

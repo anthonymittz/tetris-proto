@@ -1,12 +1,13 @@
 class PreviewView {
-  constructor(nextTetromino, context, scale, colors) {
-    this.tetromino = nextTetromino;
+  constructor(game, context, scale, colors) {
+    this.game = game;
     this.context = context;
     this.colors = colors;
 
     this.width = this.context.canvas.clientWidth;
     this.height = this.context.canvas.clientHeight;
     this.scale = scale;
+
     this.center = {
       x: (this.width / this.scale / 2) | 0,
       y: (this.height / this.scale / 2) | 0,
@@ -16,11 +17,11 @@ class PreviewView {
   draw() {
     this.clear();
     const offset = this.#offset(
-      this.tetromino[0].length,
-      this.tetromino.length
+      this.game.nextTetromino.center.x,
+      this.game.nextTetromino.center.y
     );
 
-    this.tetromino.forEach((row, y) =>
+    this.game.nextTetromino.forEach((row, y) =>
       row.forEach((value, x) => {
         if (value !== 0) {
           this.context.fillStyle = this.colors[value];
@@ -35,10 +36,10 @@ class PreviewView {
     this.context.fillRect(0, 0, this.width, this.height);
   }
 
-  #offset(height, width) {
+  #offset(x, y) {
     return {
-      x: this.center.x - ((width / 2) | 0),
-      y: this.center.y - ((height / 2) | 0),
+      x: this.center.x - x,
+      y: this.center.y - y,
     };
   }
 }

@@ -5,17 +5,16 @@ const elements = require('./dom/elements');
 
 class Tetris {
   constructor() {
-    this.overlay = new Overlay(elements.overlay, () => this.pause());
-
-    this.game = new Game();
-    this.renderer = new Renderer(this.game);
-
     this.isPaused = true;
     this.lastRendered = 0; //ms
     this.stepCounter = 0; //ms
     this.interval = 1000; //ms
 
-    this.restart();
+    this.game = new Game();
+    this.renderer = new Renderer(this.game);
+
+    this.overlay = new Overlay(elements.overlay, () => this.pause());
+    this.overlay.showNewGameScreen();
   }
 
   run(time = 0) {
