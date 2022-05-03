@@ -44,58 +44,12 @@ body {
   width: var(--size-width);
 }
 
-.bar {
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  justify-content: space-between;
-  width: var(--size-width);
-  margin: 1em 0;
-}
-
-.bar span {
-  height: 32px;
-}
-
-#stopwatch {
-  justify-self: end;
-  font-size: var(--text-size-e);
-}
-
-#pause {
-  font-size: var(--text-size-e);
-  width: 28px;
-  height: 32px;
-  background-color: lightgray;
-  margin-left: 8px;
-}
-
-#score {
-  font-size: var(--text-size-e);
-  margin-right: 8px;
-}
-
-#preview {
-  justify-self: end;
-  background-color: lightgray;
-  width: 28px;
-  height: 30px;
-}
-
-#view {
+#game_container {
   position: relative;
   height: 416px;
 }
 
-#game {
-  border: 8px solid lightgray;
-  position: relative;
-  box-sizing: border-box;
-  background-color: white;
-  z-index: 0;
-}
-
-#overlay {
+#game_overlay {
   background-color: rgba(0, 0, 0, 0.2);
   color: white;
   position: absolute;
@@ -106,45 +60,82 @@ body {
   z-index: 10;
 }
 
+#game_display {
+  border: 8px solid lightgray;
+  position: relative;
+  box-sizing: border-box;
+  background-color: white;
+  z-index: 0;
+}
+
+#stopwatch_display {
+  justify-self: end;
+  font-size: var(--text-size-e);
+}
+
+#stop_button {
+  font-size: var(--text-size-e);
+  width: 28px;
+  height: 32px;
+  background-color: lightgray;
+  margin-left: 8px;
+}
+
+#score_display {
+  font-size: var(--text-size-e);
+  margin-right: 8px;
+}
+
+#next_tetromino_display {
+  justify-self: end;
+  background-color: lightgray;
+  width: 28px;
+  height: 30px;
+}
+
 #controls {
   font-size: var(--text-size-e);
 }
 
-/* flex */
+.bar {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+  width: var(--size-width);
+  margin: 1em 0;
+}
+.bar span {
+  height: 32px;
+}
 
+/* flex */
 .centered {
   justify-content: center;
   align-items: center;
 }
-
 .row {
   display: flex;
   flex-flow: row;
 }
-
 .column {
   display: flex;
   flex-flow: column;
 }
-
 .left,
 .right {
   display: flex;
   flex-flow: row;
 }
 
-/* color */
+/* utility */
 
 .muted {
   color: lightgray;
 }
-
-/* appearence */
-
 .ignored {
   display: none;
 }
-
 .hidden {
   visibility: hidden;
 }

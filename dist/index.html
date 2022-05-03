@@ -41,18 +41,22 @@
     <main id="app" class="centered column">
       <div class="bar">
         <div class="left">
-          <span id="stopwatch">00:00</span>
-          <span id="pause"></span>
+          <span id="stopwatch_display">00:00</span>
+          <span id="stop_button"></span>
         </div>
         <div class="right">
-          <span id="score">1200</span>
-          <canvas id="preview" width="28px" height="30px"></canvas>
+          <span id="score_display">1200</span>
+          <canvas
+            id="next_tetromino_display"
+            width="28px"
+            height="30px"
+          ></canvas>
         </div>
       </div>
 
-      <div id="view">
-        <div id="overlay" class="column centered hidden">overlay</div>
-        <canvas id="game" width="240" height="400"> </canvas>
+      <div id="game_container">
+        <div id="game_overlay" class="column centered">overlay</div>
+        <canvas id="game_display" width="240" height="400"> </canvas>
       </div>
 
       <div id="controls" class="bar centered">
